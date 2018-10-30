@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2048
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DcomServerApp", "DcomServerApp\DcomServerApp.csproj", "{BEAF2327-6CA3-4654-9B2C-62CA884525B1}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBFF502E-9F94-412B-A400-7977E2C973B8} = {BBFF502E-9F94-412B-A400-7977E2C973B8}
+		{3A5ECDB2-114C-4A0A-9464-9818F99E5683} = {3A5ECDB2-114C-4A0A-9464-9818F99E5683}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DcomClientApp", "DcomClientApp\DcomClientApp.csproj", "{35F6DA23-CBCA-49D3-8441-C6C29420846A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBFF502E-9F94-412B-A400-7977E2C973B8} = {BBFF502E-9F94-412B-A400-7977E2C973B8}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B955D9FC-9FCC-4723-ABDD-945310A68706}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DcomServerImpl", "DcomServerImpl\DcomServerImpl.csproj", "{3A5ECDB2-114C-4A0A-9464-9818F99E5683}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BBFF502E-9F94-412B-A400-7977E2C973B8} = {BBFF502E-9F94-412B-A400-7977E2C973B8}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DcomInterfaces", "DcomInterfaces\DcomInterfaces.csproj", "{BBFF502E-9F94-412B-A400-7977E2C973B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEAF2327-6CA3-4654-9B2C-62CA884525B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEAF2327-6CA3-4654-9B2C-62CA884525B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEAF2327-6CA3-4654-9B2C-62CA884525B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEAF2327-6CA3-4654-9B2C-62CA884525B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35F6DA23-CBCA-49D3-8441-C6C29420846A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35F6DA23-CBCA-49D3-8441-C6C29420846A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35F6DA23-CBCA-49D3-8441-C6C29420846A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35F6DA23-CBCA-49D3-8441-C6C29420846A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A5ECDB2-114C-4A0A-9464-9818F99E5683}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A5ECDB2-114C-4A0A-9464-9818F99E5683}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A5ECDB2-114C-4A0A-9464-9818F99E5683}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A5ECDB2-114C-4A0A-9464-9818F99E5683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBFF502E-9F94-412B-A400-7977E2C973B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBFF502E-9F94-412B-A400-7977E2C973B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBFF502E-9F94-412B-A400-7977E2C973B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBFF502E-9F94-412B-A400-7977E2C973B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8EB0E2FA-6680-4D08-B5AE-04AD8648D41E}
+	EndGlobalSection
+EndGlobal

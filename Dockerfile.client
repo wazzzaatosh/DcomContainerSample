@@ -1,0 +1,10 @@
+
+# escape=`
+FROM microsoft/dotnet-framework:4.7.2-sdk AS build
+WORKDIR /app
+COPY . .
+RUN msbuild /p:Configuration=Release
+RUN C:\windows\Microsoft.NET\Framework\v4.0.30319\RegAsm.exe C:\app\DcomServerImpl\bin\Release\DcomServerImpl.dll /codebase /silent
+EXPOSE 1-65535
+EXPOSE 1-65535/udp
+ENTRYPOINT ["/app/DcomClientApp/bin/Release/DcomClientApp.exe"]
