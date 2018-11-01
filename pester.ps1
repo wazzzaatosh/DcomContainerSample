@@ -4,14 +4,30 @@ function Get-ServerContainerName {
     return "dcomtest$num"
 }
 
-Describe 'DcomTestExe container' {
-    $script:cleanup = @()
-
+$script:cleanup = @()
+$script:network = $null
+Describe 'Dcom container tests' {
     BeforeAll {
+        # The images need to be built.
         $images = docker images --format '{{.Repository}}'
         $image = $images | Where-Object { $_ -eq 'dcomtest-exe-server' }
         if( -not $image ) {
             & $PSScriptRoot/build.ps1 | Out-Host
+        }
+
+        # We need a transparent network to use.
+        $networks = docker network ls --format '{{.Name}}|{{.Driver}}'
+        foreach( $info in $networks ) {
+            $parts = $info.Split( '|' )
+            if( $parts[1] -eq 'ics' ) {
+                $script:network = $parts[0]
+                Write-Host "`tUsing the docker internal network `"$($script:network)`"" -ForegroundColor Yellow
+                break
+            }
+        }
+
+        if( -not $script:network ) {
+            throw "An internal network cannot be found, dcom container tests require an internal network to function. An internal network can be created with the following command: docker network create -d ics --subnet 10.0.0.0/24 --gateway 10.0.0.1 internal"
         }
     }
 
@@ -19,19 +35,23 @@ Describe 'DcomTestExe container' {
         $script:cleanup | Foreach-Object { docker kill $_ }
     }
 
-    Context 'No authentication' {
-        It "Does not return access denied" {
-            $server = Get-ServerContainerName
-            Write-Host "`tStarting server container with name $server" -ForegroundColor Yellow
-            $runOutput = docker run -d --rm --name $server "dcomtest-exe-server"
-            "`t$runOutput" | Out-Host
-            $script:cleanup += $server
+    Context 'DcomTestExe application' {
+        $server = Get-ServerContainerName
+        Write-Host "`tStarting server container with name $server on network $script:network" -ForegroundColor Yellow
+        $runOutput = docker run -d --network=$script:network --rm --name $server --hostname $server "dcomtest-exe-server"
+        "`t$runOutput" | Out-Host
+        $script:cleanup += $server
 
-            $serverIp = docker inspect $server -f "{{.NetworkSettings.Networks.nat.IPAddress}}"
-            Write-Host "`tStarting client container to connect to $server on $serverIp" -ForegroundColor Yellow
-            $dockerRunOutput = docker run --rm "dcomtest-exe-client" $serverIp
-            $dockerRunOutput | % { "`t$_" | Out-Host }
+        Write-Host "`tStarting client container to connect to $server on network $script:network" -ForegroundColor Yellow
+        $dockerRunOutput = docker run --network=$script:network --rm "dcomtest-exe-client" $server
+        $dockerRunOutput | % { "`t$_" | Out-Host }
+
+        It "Does not return access denied" {
             $dockerRunOutput | Should -Not -BeLike "*access is denied*"
+        }
+
+        It "Does not return RPC server unavailable" {
+            $dockerRunOutput | Should -Not -BeLike "*RPC server is unavailable*"
         }
     }
 }
