@@ -6,7 +6,7 @@ An additional proof of concept example is included in the [DcomTestExe](./DcomTe
 
 # Examples
 
-All of the examples can be built and run using the [test.ps1](./test.ps1) script in the root of the repository. The docker images may be built separately using the [build.ps1](./build.ps1) script.
+All of the examples can be built and run using the [test.ps1](./test.ps1) script in the root of the repository. The docker images may be built separately using the [build.ps1](./build.ps1) script. The tests make use of Pester to build and test the client/server containers against each other.
 
 # Building and running locally
 
