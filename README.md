@@ -6,35 +6,7 @@ An additional proof of concept example is included in the [DcomTestExe](./DcomTe
 
 # Examples
 
-All of the examples require manual docker steps right now, until a build script is provided.
-
-## No authentication using DcomTest
-
-This test uses the DcomTest executables from microsoft (referenced [here](https://support.microsoft.com/en-us/help/259011/sample-a-simple-dcom-client-server-test-application)). The following commands will build and run the example:
-
-```sh
-docker build ./DcomTestExe -f Dockerfile.server -t cowens/dcomtest-exe-server
-docker build ./DcomTestExe -f Dockerfile.client -t cowens/dcomtest-exe-client
-docker run -d --name server cowens/dcomtest-exe-server
-
-# Inspect the server and use the ip address to run the client.
-docker inspect server
-docker run -d --rm cowens/dcomtest-exe-client x.x.x.x
-```
-
-## No authentication using sample app
-
-This test uses the sample applications in this repository with anonymous authentication.
-
-```sh
-docker build . -f Dockerfile.server -t cowens/dcom-sample-server
-docker build . -f Dockerfile.client -t cowens/dcom-sample-client
-docker run -d --name server cowens/dcom-sample-server
-
-# Inspect the server and use the ip address to run the client.
-docker inspect server
-docker run --rm cowens/dcom-sample-client x.x.x.x
-```
+All of the examples can be built and run using the [test.ps1](./test.ps1) script in the root of the repository. The docker images may be built separately using the [build.ps1](./build.ps1) script.
 
 # Building and running locally
 
