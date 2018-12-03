@@ -19,3 +19,5 @@ For debugging purposes the client and server can both be run outside of docker u
 - Once DcomTestExe works anonymously, continue filling out `pester.ps1` to test anonymous access between `DcomClientApp` and `DcomServerImpl` in two separate containers.
 
 - Once that works, write `DcomServerApp` and use that as the container entrypoint for `DcomServerImpl` instead (this is more equivalent to how our apps are intialized in production).
+
+- Once that works, write another test that uses a gMSA for authentication between the two containers (this will require a test domain setup either locally or on azure).
