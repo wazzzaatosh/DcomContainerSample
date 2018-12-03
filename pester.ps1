@@ -15,7 +15,8 @@ Describe 'Dcom container tests' {
             & $PSScriptRoot/build.ps1 | Out-Host
         }
 
-        # We need a transparent network to use.
+        # We need an internal network to use.
+        # TODO: This might need to be a transparent network? Not sure if internal uses NAT at all.
         $networks = docker network ls --format '{{.Name}}|{{.Driver}}'
         foreach( $info in $networks ) {
             $parts = $info.Split( '|' )
